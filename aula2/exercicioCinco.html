@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício cinco</title>
+</head>
+<body>
+    <!-- todo: criando ladrilho com função e laço de repetição-->
+    <canvas widht="600" height="400"></canvas>
+
+    <script>
+        function desenhaQuadrado(x, y, cor){
+            var tela = document.querySelector("canvas");
+            var pincel = tela.getContext('2d');
+
+            pincel.fillStyle = cor;
+            pincel.fillRect(x,y,30,30)
+
+            pincel.strokeStyle = 'red'
+            pincel.strokeRect(x,y,30,30)
+        }
+
+        var x = 0
+        while(x < 600){
+            desenhaQuadrado(x, 0, "pink");
+            desenhaQuadrado(x, 30, "salmon");
+            desenhaQuadrado(x, 60, "pink");
+            desenhaQuadrado(x, 90, "salmon");
+            desenhaQuadrado(x, 120, "pink");
+            x = x + 30;
+        }
+    </script>
+</body>
+</html>
