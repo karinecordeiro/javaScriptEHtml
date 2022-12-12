@@ -22,9 +22,9 @@
             var y = evento.pageY - tela.offsetTop;
             console.log(x + ',' + y);
             var raio = 10;
-            if (evento.shiftKey) {
-            raio = raio + 20; // raio agora passa a valer 30!
-            }
+                if (evento.shiftKey) {
+                    raio = raio + 20; // raio agora passa a valer 30!
+                }
             pincel.fillStyle = 'crimson';
             pincel.beginPath();
             pincel.arc(x, y, raio, 0, 2 * 3.14);

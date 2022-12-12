@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício dezesseis</title>
+</head>
+<body>
+    <canvas width="500" height="500"></canvas>
+    selecione a cor <input type="color">
+
+    <script>
+    var paleta = document.querySelector('input');
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+    pincel.fillStyle = 'LightGrey';
+    pincel.fillRect(0, 0, 500, 500);
+    var desenha = false;
+
+    function desenhaCirculo(evento) {
+        if (desenha) {
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+        pincel.fillStyle = paleta.value; // sempre pega o valor atual da paleta!
+        pincel.beginPath();
+        pincel.arc(x, y, 10, 0, 2 * 3.14);
+        pincel.fill();
+        }
+        console.log(x + ',' + y);
+    }
+    function desenhaTexto(texto, x, y){
+                pincel.font = '15px Arial';
+                pincel.fillStyle= "Grey";
+                pincel.fillText(texto, x, y);
+    }
+
+    desenhaTexto('Pressione a tecla esquerda do mouse e arraste para usar o pincel', 20,30)
+
+    tela.onmousemove = desenhaCirculo;
+    // atribuindo diretamente a função anônima
+    tela.onmousedown = function() {
+        desenha = true;
+    }
+    // atribuindo diretamente a função anônima
+    tela.onmouseup = function() {
+        desenha = false;
+    }
+    </script>
+</body>
+</html>
