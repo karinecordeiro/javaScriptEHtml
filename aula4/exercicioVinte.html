@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercício dezenove</title>
+    <title>Exercício vinte</title>
 </head>
 <body>
-    <!-- todo: Bolinha em movimento para frente e para trás-->
+    <!-- todo: Bolinha em movimento crescente e decrescente-->
     <canvas width="500" height="500"></canvas>
 
     <script>
@@ -17,7 +17,7 @@
         pincel.fillRect(0, 0, 500, 500);
 
         function desenhaCirculo(xInicial, yInicial, raio){
-            pincel.fillStyle = 'darkOrange';
+            pincel.fillStyle = 'darkRed';
             pincel.beginPath();
             pincel.arc(xInicial, yInicial, raio, 0, 2*Math.PI);
             pincel.fill();
@@ -25,21 +25,21 @@
         function limpaTela(){
             pincel.clearRect(0,0,500,500);
         }
-        var x = 40; // variavel fora da função para o movimento acontecer
-        var sentido = 1
+        var raio = 19; // variavel fora da função para o movimento acontecer
+        var fatorCrescimento = 0
 
         function moveCirculo(){
             limpaTela();
 
-            if(x > 450){
-                sentido = -1;
-            } else if(x < 50){
-                sentido = 1;
+            if(raio > 80){
+                fatorCrescimento = -1;
+            } else if(raio < 20){
+                fatorCrescimento = 1;
             }
-            desenhaCirculo(x,40,20);
-            x = x + sentido;
+            desenhaCirculo(250,250,raio);
+            raio =  raio + fatorCrescimento;
         }
-        setInterval(moveCirculo, 10)
+        setInterval(moveCirculo, 15)
         
     </script>
 </body>
