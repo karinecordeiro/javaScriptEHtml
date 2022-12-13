@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício vinte e quatro</title>
+</head>
+<body>
+    <!-- todo: Paleta de cores e tela para pintar -->
+    <canvas width="1000" height="500"></canvas>
+
+    <script>
+        //desenha quadrado da paleta
+        function desenhaQuadrado(x, y, tamanho, cor) {
+            pincel.fillStyle = cor;
+            pincel.fillRect(x, y, tamanho, tamanho)
+            pincel.fill();
+        }
+
+        //desenha ponta do pincel
+        function desenhaCirculo(x, y, raio, cor) {
+            pincel.fillStyle = cor;
+            pincel.beginPath();
+            pincel.arc(x, y, raio, 0, 2 * 3.14);
+            pincel.fill();
+
+        }
+
+        //criação da paleta horizontal
+        function desenhaPaletaDeCores() {
+            desenhaQuadrado(xPink, yQuadrados, tamanhoQuadrados, 'pink');
+            desenhaQuadrado(xVerde, yQuadrados, tamanhoQuadrados, 'lightGreen');
+            desenhaQuadrado(xAzul, yQuadrados, tamanhoQuadrados, 'royalBlue');
+            desenhaQuadrado(xAmarelo, yQuadrados, tamanhoQuadrados, 'khaki');
+            desenhaQuadrado(xLilas, yQuadrados, tamanhoQuadrados, 'plum');
+        }
+
+        //limite de tela para o pincel não ultrapassar
+        function lidaComMovimentoDoMouse(evento) {
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+
+            if(desenha && podeDesenharNaArea(x,y)) {
+                desenhaCirculo(x, y, 5, corAtual);
+            }
+        }
+
+        //evento de clique do mouse pressionado
+        function habilitaDesenhar() {
+            desenha = true;
+        }
+        
+        //evento do clique do mouse não pressionado
+        function desabilitaDesenhar() {
+            desenha = false;
+        }
+
+        //barreira para não passar o pincel em cima da paleta
+        function podeDesenharNaArea(x, y) {
+            if(x >= 0 && x < 5*tamanhoQuadrados && y >= 0 && y < tamanhoQuadrados) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        //escolha da cor do pincel
+        function selecionaCor(evento) {
+            var x = evento.pageX - tela.offsetLeft;
+            var y = evento.pageY - tela.offsetTop;
+
+            if (y > yQuadrados && y < yQuadrados + tamanhoQuadrados) {
+                if (x > xPink && x < xPink + tamanhoQuadrados) {
+                    corAtual = 'pink';
+                } else if (x > xVerde && x < xVerde + tamanhoQuadrados) {
+                    corAtual = 'lightGreen';
+                } else if (x > xAzul && x < xAzul + tamanhoQuadrados) {
+                    corAtual = 'royalBlue';
+                }else if (x > xAmarelo && x < xAmarelo + tamanhoQuadrados) {
+                    corAtual = 'khaki';
+                }else if (x > xLilas && x < xLilas + tamanhoQuadrados) {
+                    corAtual = 'plum';
+                }
+            }
+        }
+
+        //habilitando o uso do html no js
+        var tela = document.querySelector('canvas');
+        var pincel = tela.getContext('2d');
+
+        //tela do canvas
+        pincel.fillStyle = 'snow';
+        pincel.fillRect(0, 0, 1000, 500);
+
+        var desenha = false;
+        var corAtual = 'royalBlue';
+
+        //posições dos quadrados da paleta
+        var xPink = 0;
+        var xVerde  = 50;
+        var xAzul = 100;
+        var xAmarelo = 150;
+        var xLilas = 200;
+        var yQuadrados = 0;
+        var tamanhoQuadrados = 50;
+
+        //mostra a paleta na tela
+        desenhaPaletaDeCores();
+
+        //movimento do mouse
+        tela.onmousemove = lidaComMovimentoDoMouse;
+
+        //pressionar o mouse
+        tela.onmousedown = habilitaDesenhar;
+
+        //não pressionar mouse
+        tela.onmouseup = desabilitaDesenhar;
+
+        //clicar com mouse
+        tela.onclick = selecionaCor;
+
+    </script>
+</body>
+</html>
